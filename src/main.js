@@ -20,7 +20,7 @@ formEl.addEventListener('submit', onFormSubmit);
 function onFormSubmit(event) {
   event.preventDefault();
 
-  const inputSubmit = event.currentTarget.elements['search-text'].value;
+  const inputSubmit = event.currentTarget.elements['search-text'].value.trim();
 
   console.log(event);
 
@@ -38,11 +38,22 @@ function onFormSubmit(event) {
           message:
             'Sorry, there are no images matching your search query. Please try again!',
         });
+
+        event.target.reset();
         return;
       }
 
       createGallery(value.hits);
-    })
 
-    .finally(hideLoader);
+      event.target.reset();
+    })
+    .catch(() => {
+      iziToast.show({
+        message:
+          'Sorry, there are no images matching your search query. Please try again!',
+      });
+
+      event.target.reset();
+    })
+    .finally(() => hideLoader());
 }

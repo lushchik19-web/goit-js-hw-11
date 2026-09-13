@@ -16,7 +16,7 @@ export function createGallery(images) {
     .map(image => {
       return `<li>
       <a href="${image.largeImageURL}">
-        <img src="${image.webformatURL}" alt="${image.tags}"/>
+        <img src="${image.webformatURL}" alt="${image.tags}" width="360" height="300"/>
       </a>
       <p>${image.likes}</p>
       <p>${image.views}</p>
